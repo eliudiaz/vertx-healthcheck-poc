@@ -1,25 +1,16 @@
 package com.fox.health;
 
-import io.vertx.core.AbstractVerticle;
+import com.fox.health.sdk.base.RestBasedVerticle;
 import io.vertx.core.Future;
 import io.vertx.ext.web.Router;
 
-public class SingleRestVerticle extends AbstractVerticle {
+public class SingleRestVerticle extends RestBasedVerticle {
 
     @Override
     public void start(Future<Void> fut) {
-        Router r = Router.router(vertx);
+        Router r = super.register(Router.router(vertx));
         r.get("/talk")
                 .handler(h -> h.response().end("hello world!"));
-        r.get("/up")
-                .handler(h -> {
-                    try {
-                        Thread.sleep(1000);
-                        h.response().end("Yes I am!");
-                    } catch (InterruptedException e) {
-                        h.fail(500);
-                    }
-                });
         vertx
                 .createHttpServer()
                 .requestHandler(r::accept)

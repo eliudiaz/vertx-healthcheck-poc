@@ -11,7 +11,7 @@ public abstract class BaseVerticle<T> extends AbstractVerticle {
     public static final String PING = "PING";
     public static final String PONG = "PONG";
 
-    abstract void handleRequest(T request);
+    public abstract void handleRequest(T request);
 
     public boolean isPingRequest(String content) {
         return content.equalsIgnoreCase(PING);

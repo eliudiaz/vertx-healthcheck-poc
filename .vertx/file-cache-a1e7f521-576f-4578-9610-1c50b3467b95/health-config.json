@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {
+      "name": "test",
+      "path": "test",
+      "type": "message"
+    }
+  ]
+}

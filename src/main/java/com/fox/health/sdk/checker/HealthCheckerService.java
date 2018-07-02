@@ -83,7 +83,6 @@ public class HealthCheckerService extends AbstractVerticle {
         ConfigRetrieverOptions options = new ConfigRetrieverOptions()
                 .addStore(fileStore);
         ConfigRetriever retriever = ConfigRetriever.create(vertx, options);
-        Router router = Router.router(vertx);
         HealthCheckHandler checker = HealthCheckHandler.create(vertx);
 
         retriever.getConfig(reg -> {
@@ -91,6 +90,7 @@ public class HealthCheckerService extends AbstractVerticle {
                 List cfgNodes = reg.result().getJsonArray("nodes").getList();
                 HealthCheckerService.this.setNodes(cfgNodes, h -> {
                     registerNodes(checker);
+                    Router router = Router.router(vertx);
                     router.get("/health").handler(checker::handle);
                     vertx
                             .createHttpServer()
