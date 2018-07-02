@@ -1,5 +1,6 @@
 package com.fox.health;
 
+import com.fox.health.sdk.checker.HealthCheckerService;
 import io.vertx.core.Vertx;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
@@ -17,7 +18,7 @@ public class MyFirstVerticleTest {
     @Before
     public void setUp(TestContext context) {
         vertx = Vertx.vertx();
-        vertx.deployVerticle(HealthVerticle.class.getName(),
+        vertx.deployVerticle(HealthCheckerService.class.getName(),
             context.asyncAssertSuccess());
     }
 
